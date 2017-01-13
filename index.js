@@ -1,7 +1,6 @@
 var http = require('http');
 var express = require('express');
 var routes = require('./routes');
-var db = require('./config/db.js');
 var path = require('path');
 var app = express();
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
@@ -25,8 +24,6 @@ app.use(passport.initialize());
 app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
-app.set('view engine', 'ejs');
-app.locals.pagetitle = "Awesome Website";
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
@@ -50,8 +47,4 @@ app.get('*', function(req, res) {
 
 var server = app.listen(3000, function() {
 	console.log("listening");
-});
-
-app.get('/wahis', function (req, res, next) {
-	res.send(questions);
 });

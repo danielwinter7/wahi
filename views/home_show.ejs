@@ -11,7 +11,7 @@
 
         <a href="/home" class="btn btn-wahi pull-right">Zurück zur Übersicht</a>
 
-				<h1><%=title %></h1>
+				<h1><%=title %> - <%= rows[0].toCity %></h1>
 
          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&key=AIzaSyAK6mYhbwDDfsKBx5V_ywq8Nb8gCOggv5c"></script>
@@ -53,7 +53,12 @@
         </script>
 
 		    <div class="content__detailview">  
-            <div class="content__detailview-map" id="mapdetail"></div>      
+            <div class="content__detailview-image">
+              <% if (typeof rows[0].image !='undefined' ? rows[0].image : '') { %>
+                <img src="http://la-metanoia.de/uploadWahikaka/<%= rows[0].image %>"></div>   
+              <% } else{ %>  
+                  <img src="/images/default.jpg"></div>
+              <% } %>
             <div class="content__detailview-info">
                 <p><i class="fa fa-hand-o-right fa-fw fa-2x" aria-hidden="true"></i> <%= rows[0].steps %> Schritte, in Richtung: <%= rows[0].direction %></p>
                 <p><i class="fa fa-map-marker fa-fw fa-2x" aria-hidden="true"></i> von: <%= rows[0].fromCity %> - nach <%= rows[0].toCity %>, <%= rows[0].toCountry %></p>
@@ -61,6 +66,7 @@
             </div>
             <a class="btn btn-danger pull-right" href="/home/delete/<%= rows[0].id %>">Lösche dieses Wahikaka!</a>
             <div class="clearfix"></div>
+            <div class="content__detailview-mapdetail" id="mapdetail"></div>  
         </div>
 
 

@@ -30,7 +30,7 @@ exports.home = function(req, res) {
 		else {
 			res.render('home', {
 				'rows' : rows,
-				title: 'Meine Wahikakas',
+				title: 'Meine Wahi Kakas',
 				message: req.flash('messageDelete')
 			});
 		}
@@ -129,22 +129,6 @@ exports.wahis = function(req, res) {
 			throw err;
 		}
 		else {
-			res.send(rows);
-		}
-		
-	});
-};
-
-// REST-API
-// =====================================
-// GET ===============================
-// =====================================
-exports.wahis = function(req, res) {
-	connection.query('SELECT * FROM wahis', function(err, rows, fields) {
-		if (err) {
-			throw err;
-		}
-		else {
 			res.send({ result:rows });
 		}
 		
@@ -177,34 +161,30 @@ exports.wahis.save_edit = function(req,res){
     
     var input = JSON.parse(JSON.stringify(req.body));
     var id = req.params.id;
+
+    var data = {
+        
+        steps	: input.steps,
+        fromCity : input.fromCity,
+        toCity : input.toCity,
+        toCountry : input.toCountry,
+        direction  : input.direction,
+        latFrom  : input.latFrom,
+        latTo   : input.latTo,
+        lonFrom : input.lonFrom,
+        lonTo : input.lonTo
     
-    // req.getConnection(function (err, connection) {
-        
-        var data = {
-            
-            steps	: input.steps,
-            fromCity : input.fromCity,
-            toCity : input.toCity,
-            toCountry : input.toCountry,
-            direction  : input.direction,
-            latFrom  : input.latFrom,
-            latTo   : input.latTo,
-            lonFrom : input.lonFrom,
-            lonTo : input.lonTo
-        
-        };
-        
-        connection.query("UPDATE wahis set ? WHERE id = ? ",[data,id], function(err, rows)
-        {
-  
-          if (err)
-              console.log("Error Updating : %s ",err );
-         
-          res.redirect('/wahis');
-          
-        });
+    };
     
-    // });
+    connection.query("UPDATE wahis set ? WHERE id = ? ",[data,id], function(err, rows)
+    {
+
+      if (err)
+          console.log("Error Updating : %s ",err );
+     
+      res.redirect('/wahis');
+      
+    });
 };
 
 // =====================================
@@ -212,19 +192,14 @@ exports.wahis.save_edit = function(req,res){
 // =====================================
 exports.wahis.delete = function(req,res){
           
-     var id = req.params.id;
-    
-     // req.getConnection(function (err, connection) {
+    var id = req.params.id;        
+    connection.query("DELETE FROM wahis WHERE id = ? ",[id], function(err, rows)
+    {
         
-        connection.query("DELETE FROM wahis WHERE id = ? ",[id], function(err, rows)
-        {
-            
-             if(err)
-                 console.log("Error deleting : %s ",err );
-            
-             res.send(id);
-             
-        });
+         if(err)
+             console.log("Error deleting : %s ",err );
         
-     // });
+         res.send(id);
+         
+    });
 };
