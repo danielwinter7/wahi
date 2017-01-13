@@ -1,0 +1,119 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400);
+.form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  margin: 10px 0 0 0;
+  color: white;
+  box-shadow: none; }
+
+::-webkit-input-placeholder {
+  color: white !important; }
+
+.btn-wahi {
+  background-color: white;
+  color: #f49766;
+  text-transform: uppercase; }
+
+.btn-register {
+  font-size: 12px;
+  text-transform: uppercase;
+  margin: 15px 0 0 0;
+  display: inline-block;
+  color: white; }
+  .btn-register:hover {
+    color: #333;
+    text-decoration: none !important; }
+
+.dropdown-menu {
+  top: 38px; }
+
+.help-block {
+  background-color: #f29a6c;
+  padding: 5px;
+  border: 1px solid #f49766; }
+
+.wrapper__home {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: url("/images/bg.jpg") 50% 100% no-repeat;
+  background-size: cover;
+  position: relative; }
+
+.wrapper__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(186, 68, 40, 0.75); }
+
+.wrapper__logo {
+  width: 201px;
+  height: 197px;
+  position: absolute;
+  top: 10%;
+  left: calc(50% - 96px);
+  text-align: center;
+  background: url("/images/Logo.png") no-repeat; }
+  .wrapper__logo-intro {
+    color: white;
+    position: relative;
+    top: 200px;
+    text-transform: uppercase; }
+    .wrapper__logo-intro h1 {
+      margin: 0 0 10px 0 !important; }
+    .wrapper__logo-intro h3 {
+      border-top: 1px solid white;
+      padding: 10px 0 0 0;
+      font-size: 18px !important; }
+      .wrapper__logo-intro h3 a {
+        color: white; }
+        .wrapper__logo-intro h3 a:hover {
+          color: #1a1a1a;
+          text-decoration: none; }
+    .wrapper__logo-intro h5 {
+      padding: 20px 0 0 0; }
+
+.navbar-wahi {
+  background-color: #eb403b;
+  border-color: #f29a6c; }
+
+.navbar-nav li > a {
+  color: #f29a6c; }
+
+.content {
+  color: white; }
+  .content__detailview {
+    background: white;
+    padding: 10px;
+    color: #333;
+    margin-bottom: 25px; }
+    .content__detailview-map {
+      width: 100%;
+      height: 450px; }
+    .content__detailview-info {
+      padding: 20px; }
+      .content__detailview-info p {
+        padding: 3px 5px; }
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: transparent; }
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: #f3a47a; }
+
+.table > tbody > tr > td {
+  border: 0; }
+
+html, body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  height: 100%;
+  background-color: #f29a6c;
+  color: white; }
+
+li {
+  list-style-type: none; }

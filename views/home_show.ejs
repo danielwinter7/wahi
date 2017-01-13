@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<% include partials/page/head.ejs %>
+  </head>
+  <body class="<%= classname %>">
+	<% include partials/page/header.ejs %>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-12">
+
+        <a href="/home" class="btn btn-wahi pull-right">Zurück zur Übersicht</a>
+
+				<h1><%=title %></h1>
+
+         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&key=AIzaSyAK6mYhbwDDfsKBx5V_ywq8Nb8gCOggv5c"></script>
+        <script type="text/javascript" src="../../js/gmaps.js"></script>
+        <script type="text/javascript">
+          var map;
+          var rowsmap = <%- JSON.stringify(rows) %>;
+          console.log(rowsmap[0].latTo);
+          console.log(rowsmap[0].lonTo);
+          $(document).ready(function(){
+            map = new GMaps({
+              el: '#mapdetail',
+              zoom: 9,
+              lat: rowsmap[0].latTo,
+              lng: rowsmap[0].lonTo,
+              click: function(e){
+                console.log(e);
+              }
+            });
+
+            path = [[rowsmap[0].latFrom, rowsmap[0].lonFrom], [rowsmap[0].latTo, rowsmap[0].lonTo]];
+
+            map.addMarker({
+              lat: rowsmap[0].latTo,
+              lng: rowsmap[0].lonTo,
+              title: rowsmap[0].toCity,
+              infoWindow: {
+                content: '<p style="color: black;">Start: '+rowsmap[0].fromCity+' <br/> Ziel: '+rowsmap[0].toCity+'</p>'
+              }
+            });
+
+            map.drawPolyline({
+              path: path,
+              strokeColor: '#131540',
+              strokeOpacity: 0.6,
+              strokeWeight: 6
+            });
+          });
+        </script>
+
+		    <div class="content__detailview">  
+            <div class="content__detailview-map" id="mapdetail"></div>      
+            <div class="content__detailview-info">
+                <p><i class="fa fa-hand-o-right fa-fw fa-2x" aria-hidden="true"></i> <%= rows[0].steps %> Schritte, in Richtung: <%= rows[0].direction %></p>
+                <p><i class="fa fa-map-marker fa-fw fa-2x" aria-hidden="true"></i> von: <%= rows[0].fromCity %> - nach <%= rows[0].toCity %>, <%= rows[0].toCountry %></p>
+                <p><i class="fa fa-quote-left fa-fw fa-2x" aria-hidden="true"></i><%= rows[0].infoText %></p>
+            </div>
+        </div>
+
+
+  			</div>
+  		</div>
+  	</div>
+
+
+	<% include partials/page/footer.ejs %>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

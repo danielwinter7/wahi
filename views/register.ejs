@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/page/head.ejs %>
+  </head>
+  <body>
+    <div class="wrapper__home">
+        <div class="wrapper__overlay">
+
+            <div class="wrapper__logo">
+                <div class="wrapper__logo-intro">
+                    <h1>Wahikaka</h1>
+                    <h3>Entdecke neue Orte</h3>
+
+                    <div class="col-md-12">
+
+                        <p><span class="fa fa-sign-in"></span> Registrieren</p>
+
+                        <form role="form" method="POST">
+
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <input id="name" type="text" placeholder="Name" class="form-control" name="name" value="" required autofocus>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="" required>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <input id="password" type="password" placeholder="Password" class="form-control" name="password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-wahi btn-block">Registrieren</button>
+
+                        </form>
+
+                        <a href="/login" class="btn-register">Zurück zum Login!</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <% include partials/page/footer.ejs %>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>

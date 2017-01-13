@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<% include partials/page/head.ejs %>
+  </head>
+  <body>
+	<div class="wrapper__home">
+	    <div class="wrapper__overlay">
+
+	        <div class="wrapper__logo">
+	            <div class="wrapper__logo-intro">
+	                <h1>Wahikaka</h1>
+	                <h3><a href="/home">Entdecke neue Orte</a></h3>
+
+	                <div class="col-md-12">
+
+					    <p><span class="fa fa-sign-in"></span> Login</p>
+
+					    <!-- show any messages that come back with authentication -->
+					    <% if (message.length > 0) { %>
+					        <div class="alert alert-danger"><%= message %></div>
+					    <% } %>
+
+					    <!-- LOGIN FORM -->
+					    <form action="/login" method="post">
+					        <div class="form-group">
+            					<input id="email" type="email" placeholder="Your email address" class="form-control" name="email" value="" required autofocus>
+					        </div>
+					        <div class="form-group">
+            					<input id="password" type="password" placeholder="********" class="form-control" name="password" required>
+					        </div>
+
+					        <button type="submit" class="btn btn-wahi btn-block">Login</button>
+					    </form>
+
+					    <a href="/register" class="btn-register">Noch keinen Account? Register dich!</a>
+					</div>
+    
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<% include partials/page/footer.ejs %>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

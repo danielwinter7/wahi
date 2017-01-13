@@ -1,0 +1,109 @@
+@import "variables";
+
+.form-control {
+	background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    margin: 10px 0 0 0;
+    color: white;
+    box-shadow: none;
+}
+
+::-webkit-input-placeholder {
+	color: white !important;
+}
+
+.btn-wahi {
+	background-color: white;
+	color: $brand-primary;
+	text-transform: uppercase;
+}
+
+.btn-register {
+	font-size: 12px;
+	text-transform: uppercase;
+	margin: 15px 0 0 0;
+	display: inline-block;
+	color: white;
+
+	&:hover {
+		color: $text-color;
+		text-decoration: none !important;
+	}
+}
+
+.dropdown-menu {
+	top: 38px;
+}
+
+
+.help-block {
+	background-color: $body-bg;
+	padding: 5px;
+	border: 1px solid $brand-primary;
+}
+
+.wrapper {
+	&__home {
+		width: 100%;
+		height: 100%;
+		color: white;
+		background: url("/images/bg.jpg") 50% 100% no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+
+	&__overlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: rgba(186, 68, 40,0.75);
+	}
+
+	&__logo {
+		width: 201px;
+		height: 197px;
+		position: absolute;
+		top: 10%;
+		left: calc(50% - 96px);
+		text-align: center;
+		background: url("/images/Logo.png") no-repeat;
+
+		&-intro {
+			color: white;
+			position: relative;
+			top: 200px;
+			text-transform: uppercase;
+
+			h1 {
+				margin: 0 0 10px 0 !important;
+			}
+
+			h3 {
+				border-top: 1px solid white;
+				padding: 10px 0 0 0;
+				font-size: 18px !important;
+
+				a {
+					color: white;
+
+					&:hover {
+						color: darken($text-color, 10%);
+						text-decoration: none;
+					}
+				}
+			}
+
+			h5 {
+				padding: 20px 0 0 0;
+			}
+
+
+		}
+	}
+}
+
