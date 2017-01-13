@@ -3,11 +3,15 @@
   <head>
 	<% include partials/page/head.ejs %>
   </head>
-  <body class="<%= classname %>">
+  <body>
 	<% include partials/page/header.ejs %>
   	<div class="container">
   		<div class="row">
   			<div class="col-md-12">
+          <% if (message.length > 0) { %>
+          <div class="alert alert-success alert-wahi"><%= message %></div>
+          <% } %>
+
   				<h1><%=title %></h1>
 
           <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
@@ -57,7 +61,7 @@
                 <tbody>
                   <% for(var i=0; i<rows.length; i++) { %>
                     <tr>
-                        <td><a class="btn btn-wahi btn-sm" href="/home/show/<%= rows[i].id %>">Show Details</a></td>
+                        <td><a class="btn btn-wahi btn-sm" href="/home/show/<%= rows[i].id %>">Details</a></td>
                         <td> 23.12.2016</td>
                         <td><%= rows[i].steps %></td>
                         <td><%= rows[i].fromCity %></td>

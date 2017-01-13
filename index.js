@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', routes.index);
 app.get('/home', routes.home);
 app.get('/home/show/:id', routes.show);
+app.get('/home/delete/:id', routes.delete);
 app.get('/login', routes.login);
 app.get('/register', routes.register);
 app.post('/register', routes.register.send);

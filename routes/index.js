@@ -5,6 +5,7 @@ var connection = mysql.createConnection({
   password: 'root',
   database: 'wahikaka'
 });
+var passwordHash = require('password-hash');
 
 connection.connect(function(err){
 	if(!err) {
@@ -18,12 +19,10 @@ connection.connect(function(err){
 exports.index = function(req, res) {
 	res.render('default', {
 		title: 'Home',
-		classname: 'home'
 	});
 };
 
 exports.home = function(req, res) {
-	req.flash('test', 'it worked');
 	connection.query('SELECT * FROM wahis ORDER BY steps DESC', function(err, rows, fields) {
 		if (err) {
 			throw err;
@@ -32,7 +31,7 @@ exports.home = function(req, res) {
 			res.render('home', {
 				'rows' : rows,
 				title: 'Meine Wahikakas',
-				classname: 'home'
+				message: req.flash('messageDelete')
 			});
 		}
 		
@@ -52,11 +51,30 @@ exports.show = function(req, res){
 	else {
 		res.render('home_show',{
 			rows : rows,
-			title: " Detailübersicht ",
-			classname: 'home_show'
+			title: " Detailübersicht "
 		});
     }
                            
+    });
+};
+
+exports.delete = function(req, res){
+    
+  var id = req.params.id;
+    
+ // req.getConnection(function (err, connection) {
+    
+    connection.query("DELETE FROM wahis WHERE id = ? ",[id], function(err, rows)
+    {
+        
+        if(err) {
+             console.log("Error deleting : %s ",err );
+        }
+        else {
+        	req.flash('messageDelete', 'Wahikaka erflogreich gelöscht');
+         	res.redirect('/home');
+     	}
+         
     });
 };
 
@@ -78,7 +96,6 @@ exports.login = function(req, res) {
 // =====================================
 // show the login form
 exports.register = function(req, res) {
-
     // render the page and pass in any flash data if it exists
     res.render('register', {message: req.flash('registerMessage'),
 		title: "register",
@@ -90,13 +107,15 @@ exports.register.send = function(req, res) {
     var data = {
 		name	: input.name,
 		email : input.email,
-		password : input.password
+		password : passwordHash.generate(input.password)
     };
 
     connection.query('INSERT INTO users SET ?', data, function(err, rows, fields){
 	if (err) console.log("Error inserting : %s ",err );
-
-    res.redirect('/login');
+		res.render('login', {
+			message: 'Vielen Dank für Deine Registierung, '+ data.name +'. Du kannst Dich nun einloggen.',
+			title: "Login",
+   		});
 	});
 };
 
@@ -126,7 +145,7 @@ exports.wahis = function(req, res) {
 			throw err;
 		}
 		else {
-			res.send(rows);
+			res.send({ result:rows });
 		}
 		
 	});
@@ -145,7 +164,7 @@ exports.wahis.show = function(req, res) {
 		throw err;
 	}
 	else {
-		res.send(rows);
+		res.send({ result:rows });
     }
                            
     });

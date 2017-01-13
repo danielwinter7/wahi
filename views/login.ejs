@@ -5,6 +5,16 @@
   </head>
   <body>
 	<div class="wrapper__home">
+		<% if (message.length > 0) { %>
+	  	<div class="container">
+	  		<div class="row">
+	  			<div class="col-md-12">
+	  				<div class="alert alert-success alert-wahi"><%= message %></div>
+	  			</div>
+	  		</div>
+	  	</div>
+	    <% } %>
+
 	    <div class="wrapper__overlay">
 
 	        <div class="wrapper__logo">
@@ -15,11 +25,6 @@
 	                <div class="col-md-12">
 
 					    <p><span class="fa fa-sign-in"></span> Login</p>
-
-					    <!-- show any messages that come back with authentication -->
-					    <% if (message.length > 0) { %>
-					        <div class="alert alert-danger"><%= message %></div>
-					    <% } %>
 
 					    <!-- LOGIN FORM -->
 					    <form action="/login" method="post">

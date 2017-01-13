@@ -3,7 +3,7 @@
   <head>
 	<% include partials/page/head.ejs %>
   </head>
-  <body class="<%= classname %>">
+  <body>
 	<% include partials/page/header.ejs %>
   	<div class="container">
   		<div class="row">
@@ -59,7 +59,12 @@
                 <p><i class="fa fa-map-marker fa-fw fa-2x" aria-hidden="true"></i> von: <%= rows[0].fromCity %> - nach <%= rows[0].toCity %>, <%= rows[0].toCountry %></p>
                 <p><i class="fa fa-quote-left fa-fw fa-2x" aria-hidden="true"></i><%= rows[0].infoText %></p>
             </div>
+            <a class="btn btn-danger pull-right" href="/home/delete/<%= rows[0].id %>">Lösche dieses Wahikaka!</a>
+            <div class="clearfix"></div>
         </div>
+
+
+        
 
 
   			</div>
