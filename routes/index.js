@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'wahikaka'
+  host: 'rdbms.strato.de',
+  user: 'U2810155',
+  password: 'wahikaka2016',
+  database: 'DB2810155'
 });
 var passwordHash = require('password-hash');
 
