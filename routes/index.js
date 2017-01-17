@@ -174,6 +174,27 @@ exports.wahis.show = function(req, res) {
 };
 
 // =====================================
+// GET Single Wahi =====================
+// =====================================
+exports.wahis.showUserWahis = function(req, res) {
+  var id = req.params.id;
+  
+  connection.query('SELECT * FROM wahis WHERE userid = ?',[id],function(err,rows)
+    {
+            
+    if(err) {
+    throw err;
+  }
+  else {
+    res.send({ result:rows });
+    }
+                           
+    });
+};
+
+
+
+// =====================================
 // UPDATE Single Wahi ==================
 // =====================================
 exports.wahis.save_edit = function(req,res){
