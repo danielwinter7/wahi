@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'wahikaka'
+  host: 'sql11.freemysqlhosting.net',
+  user: 'sql11154229',
+  password: 'UjFU1sJ8ke',
+  database: 'sql11154229'
 });
 var passwordHash = require('password-hash');
 
@@ -31,7 +31,8 @@ exports.home = function(req, res) {
 			res.render('home', {
 				'rows' : rows,
 				title: 'Meine Wahi Kakas',
-				message: req.flash('messageDelete')
+				message: req.flash('messageDelete'),
+        message: req.flash('messageLogin')
 			});
 		}
 		
@@ -87,7 +88,25 @@ exports.login = function(req, res) {
 
     // render the page and pass in any flash data if it exists
     res.render('login', {message: req.flash('loginMessage'),
-		title: "Login",
+		        title: "Login",
+            message: req.flash('messageRegister')
+    });
+};
+
+exports.login.send = function(req, res) {
+  var input = JSON.parse(JSON.stringify(req.body));
+  var data = {
+    email : input.email,
+    password : passwordHash.generate(input.password)
+    };
+  // res.send(data);
+
+    connection.query('SELECT * FROM users WHERE email = ?', data.email, function(err, rows, fields){
+    if (err) console.log("Error inserting : %s ",err );
+      console.log(rows);
+          req.flash('messageLogin', 'Du bist nun eingeloggt: '+ rows[0].name +'. Viel Spaß mit deinen Wahi Kakas.');
+          res.redirect('/home');
+
     });
 };
 
@@ -111,7 +130,7 @@ exports.register.send = function(req, res) {
     };
 
     connection.query('INSERT INTO users SET ?', data, function(err, rows, fields){
-	if (err) console.log("Error inserting : %s ",err );
+	   if (err) console.log("Error inserting : %s ",err );
 		res.render('login', {
 			message: 'Vielen Dank für Deine Registierung, '+ data.name +'. Du kannst Dich nun einloggen.',
 			title: "Login",

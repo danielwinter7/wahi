@@ -2,14 +2,16 @@ var http = require('http');
 var express = require('express');
 var routes = require('./routes');
 var path = require('path');
-var app = express();
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var flash    = require('connect-flash');
-
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var passwordHash = require('password-hash');
+
+var app = express();
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -33,6 +35,12 @@ app.get('/home/delete/:id', routes.delete);
 app.get('/login', routes.login);
 app.get('/register', routes.register);
 app.post('/register', routes.register.send);
+app.post('/login', routes.login.send);
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  // insert your MongoDB check here. For now, just a simple hardcoded check.
+  res.send("hallo");
+}));
 
 //REST-API
 app.get('/wahis', routes.wahis);
