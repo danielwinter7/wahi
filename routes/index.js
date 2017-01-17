@@ -158,26 +158,34 @@ exports.wahis = function(req, res) {
 // ADD ===============================
 // =====================================
 exports.wahis.add = function(req, res) {
-  // var input = JSON.parse(JSON.stringify(req.body));
+    var input = JSON.parse(JSON.stringify(req.body));
+    var id = req.params.id;
+
     var data = {
-    steps  : 2000,
-    toCity : "test",
-    toCountry : "hallstadt"
-  };
+        
+        steps : input.steps,
+        fromCity : input.fromCity,
+        toCity : input.toCity,
+        toCountry : input.toCountry,
+        direction  : input.direction,
+        image  : input.image,
+        latFrom  : input.latFrom,
+        latTo   : input.latTo,
+        lonFrom : input.lonFrom,
+        lonTo : input.lonTo,
+        infoText  : input.infoText
+    };
+    
+    connection.query('INSERT INTO wahis set ?', data, function(err, rows)
+    {
 
-  connection.query('INSERT INTO wahis set ?', data, function(err, result) {
-        con.release();
-        if (err) {
-          res.send({status: 1, message: 'Wahi creation failed'});
+      if (err) {
+          res.send({status: 1, message: 'Wahikaka creation failed'});
         } else {
-          res.send({status: 0, message: 'Wahi created successfully'});
+          res.send({status: 0, message: 'Wahikaka created successfully'});
         }
-      });
-};
-
-
-exports.wahis.test = function(req, res) {
-  res.send("dsaf");
+      
+    });
 };
 
 // =====================================
@@ -230,16 +238,17 @@ exports.wahis.save_edit = function(req,res){
 
     var data = {
         
-        steps	: input.steps,
+        steps : input.steps,
         fromCity : input.fromCity,
         toCity : input.toCity,
         toCountry : input.toCountry,
         direction  : input.direction,
+        image  : input.image,
         latFrom  : input.latFrom,
         latTo   : input.latTo,
         lonFrom : input.lonFrom,
-        lonTo : input.lonTo
-    
+        lonTo : input.lonTo,
+        infoText  : input.infoText    
     };
     
     connection.query("UPDATE wahis set ? WHERE id = ? ",[data,id], function(err, rows)
