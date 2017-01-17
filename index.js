@@ -44,7 +44,8 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
 //REST-API
 app.get('/wahis', routes.wahis);
-app.get('/wahis/:id', routes.wahis.show);
+app.get('/wahi/:id', routes.wahis.show);
+app.get('/wahis/:id', routes.wahis.showUserWahis);
 //update, save_edit
 app.post('/wahis/edit/:id', routes.wahis.save_edit);
 app.get('/wahis/delete/:id', routes.wahis.delete);
