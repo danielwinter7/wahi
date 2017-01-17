@@ -24,8 +24,8 @@
               map = new GMaps({
                 el: '#map',
                 zoom: 8,
-                lat: rowsmap[0].latTo,
-                lng: rowsmap[0].lonTo
+                lat: "48.7361712",
+                lng: "9.0846891"
               });
               var rows = <%- JSON.stringify(rows) %>;
               for (var i = 0, len = rows.length; i < len; i++) {
@@ -62,7 +62,7 @@
                   <% for(var i=0; i<rows.length; i++) { %>
                     <tr>
                         <td><a class="btn btn-wahi btn-sm" href="/home/show/<%= rows[i].id %>">Details</a></td>
-                        <td> 23.12.2016</td>
+                        <td><%= moment(rows[i].timestamp).format('D.MM.YYYY, HH:mm'); %></td>
                         <td><%= rows[i].steps %></td>
                         <td><%= rows[i].fromCity %></td>
                         <td><%= rows[i].toCity %></td>

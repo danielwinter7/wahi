@@ -6,6 +6,7 @@ var connection = mysql.createConnection({
   database: 'sql11154229'
 });
 var passwordHash = require('password-hash');
+var moment = require('moment');
 
 connection.connect(function(err){
 	if(!err) {
@@ -23,13 +24,14 @@ exports.index = function(req, res) {
 };
 
 exports.home = function(req, res) {
-	connection.query('SELECT * FROM wahis ORDER BY steps DESC', function(err, rows, fields) {
+	connection.query('SELECT * FROM wahis ORDER BY timestamp DESC', function(err, rows, fields) {
 		if (err) {
 			throw err;
 		}
 		else {
 			res.render('home', {
 				'rows' : rows,
+        moment: moment,
 				title: 'Meine Wahi Kakas',
 				message: req.flash('messageDelete'),
         message: req.flash('messageLogin')
@@ -103,8 +105,7 @@ exports.login.send = function(req, res) {
 
     connection.query('SELECT * FROM users WHERE email = ?', data.email, function(err, rows, fields){
     if (err) console.log("Error inserting : %s ",err );
-      console.log(rows);
-          req.flash('messageLogin', 'Du bist nun eingeloggt: '+ rows[0].name +'. Viel Spaß mit deinen Wahi Kakas.');
+          req.flash('messageLogin', 'Du bist nun eingeloggt, '+ rows[0].name +'. Viel Spaß mit deinen Wahi Kakas.');
           res.redirect('/home');
 
     });
