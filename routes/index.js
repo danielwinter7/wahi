@@ -155,6 +155,32 @@ exports.wahis = function(req, res) {
 };
 
 // =====================================
+// ADD ===============================
+// =====================================
+exports.wahis.add = function(req, res) {
+  // var input = JSON.parse(JSON.stringify(req.body));
+    var data = {
+    steps  : 2000,
+    toCity : "test",
+    toCountry : "hallstadt"
+  };
+
+  connection.query('INSERT INTO wahis set ?', data, function(err, result) {
+        con.release();
+        if (err) {
+          res.send({status: 1, message: 'Wahi creation failed'});
+        } else {
+          res.send({status: 0, message: 'Wahi created successfully'});
+        }
+      });
+};
+
+
+exports.wahis.test = function(req, res) {
+  res.send("dsaf");
+};
+
+// =====================================
 // GET Single Wahi =====================
 // =====================================
 exports.wahis.show = function(req, res) {

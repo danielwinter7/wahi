@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true })); // get information from html 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'iloveswahikaka' })); // session secret
+app.use(session({ secret: 'ilovewahikaka' })); // session secret
 app.use(passport.initialize());
 app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
@@ -37,16 +37,12 @@ app.get('/register', routes.register);
 app.post('/register', routes.register.send);
 app.post('/login', routes.login.send);
 
-passport.use(new LocalStrategy(function(username, password, done) {
-  // insert your MongoDB check here. For now, just a simple hardcoded check.
-  res.send("hallo");
-}));
-
 //REST-API
 app.get('/wahis', routes.wahis);
 app.get('/wahi/:id', routes.wahis.show);
 app.get('/wahis/:id', routes.wahis.showUserWahis);
-app.get('/wahis/add', routes.wahis.add);
+app.post('/wahis/add', routes.wahis.add);
+app.post('/wahis/test', routes.wahis.test);
 app.post('/wahis/edit/:id', routes.wahis.save_edit);
 app.get('/wahis/delete/:id', routes.wahis.delete);
 
