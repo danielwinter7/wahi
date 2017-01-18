@@ -174,14 +174,18 @@ exports.wahis.add = function(req, res) {
         latTo   : input.latTo,
         lonFrom : input.lonFrom,
         lonTo : input.lonTo,
-        infoText  : input.infoText
+        infoText  : input.infoText,
+        userid: input.userid, 
+        timestamp: input.timestamp
+
     };
     
     connection.query('INSERT INTO wahis set ?', data, function(err, rows)
     {
 
       if (err) {
-          res.send({status: 1, message: 'Wahikaka creation failed'});
+
+          res.send({status: 1, message: 'Wahikaka creation failed' + err});
         } else {
           res.send({status: 0, message: 'Wahikaka created successfully'});
         }
