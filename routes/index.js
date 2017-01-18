@@ -321,7 +321,7 @@ exports.users.show = function(req, res) {
 
 
 // =====================================
-// ADD User ===============================
+// POST User ===============================
 // =====================================
 exports.users.add = function(req, res) {
     var input = JSON.parse(JSON.stringify(req.body));
@@ -387,7 +387,7 @@ exports.wahisteps.sum = function(req, res) {
 
 
 // =====================================
-// ADD wahi steps ===============================
+// POST wahi steps ===============================
 // =====================================
 exports.wahisteps.add = function(req, res) {
     var input = JSON.parse(JSON.stringify(req.body));
@@ -444,7 +444,7 @@ exports.stepsbackup = function(req, res) {
 
 
 // =====================================
-// ADD stepbackup steps ===============================
+// POST stepbackup steps ===============================
 // =====================================
 exports.stepsbackup.add = function(req, res) {
     var input = JSON.parse(JSON.stringify(req.body));
@@ -468,3 +468,27 @@ exports.stepsbackup.add = function(req, res) {
       
     });
 };
+
+
+// =====================================
+// POST stepbackup User =====================
+// =====================================
+exports.stepsbackup.userDate = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+    var email = input.mail;
+    var date = input.date;
+
+
+  connection.query('SELECT * FROM stepzwischenstand WHERE userid = ? AND datum = ? ',[email, date],function(err,rows)
+    {
+            
+    if(err) {
+    throw err;
+  }
+  else {
+    res.send({ result:rows });
+    }
+                           
+    });
+};
+

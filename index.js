@@ -36,7 +36,7 @@ app.get('/login', routes.login);
 app.get('/register', routes.register);
 app.post('/register', routes.register.send);
 app.post('/login', routes.login.send);
-
+;
 //REST-API
 app.get('/wahis', routes.wahis);
 app.get('/wahi/:id', routes.wahis.show);
@@ -57,6 +57,7 @@ app.post('/wahisteps/add', routes.wahisteps.add);
 
 app.get('/stepsbackup/', routes.stepsbackup);
 app.post('/stepsbackup/add', routes.stepsbackup.add);
+app.post('/stepsbackup/userDate', routes.stepsbackup.userDate);
 
 app.get('*', function(req, res) {
 	res.send("Incorrect route");
