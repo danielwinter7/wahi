@@ -54,6 +54,10 @@ app.get('/wahisteps/', routes.wahisteps);
 app.post('/wahisteps/sum', routes.wahisteps.sum);
 app.post('/wahisteps/add', routes.wahisteps.add);
 
+
+app.get('/stepsbackup/', routes.stepsbackup);
+app.post('/stepsbackup/add', routes.stepsbackup.add);
+
 app.get('*', function(req, res) {
 	res.send("Incorrect route");
 });

@@ -416,11 +416,54 @@ exports.wahisteps.add = function(req, res) {
             if(err){
                 throw err;
             }else {
-              res.send({status: 0, message: 'Wahisteps updated successfully'});
+              res.send({status: 0, message: 'Wahisteps updated successfully ' + dateCol});
             }
           });
         } else {
           res.send({status: 0, message: 'Wahisteps added successfully'});
+        }
+      
+    });
+};
+
+
+// =====================================
+// GET stepbackup ==================
+// =====================================
+exports.stepsbackup = function(req, res) {
+  connection.query('SELECT * FROM stepzwischenstand', function(err, rows, fields) {
+    if (err) {
+      throw err;
+    }
+    else {
+      res.send({ result:rows });
+    }
+    
+  });
+};
+
+
+// =====================================
+// ADD stepbackup steps ===============================
+// =====================================
+exports.stepsbackup.add = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+
+    var data = {
+
+        userid: input.mail,
+        datum: input.date,
+        steps: input.steps
+
+    };
+    
+    connection.query('INSERT INTO stepzwischenstand set ?', data, function(err, rows)
+    {
+
+      if (err) {
+          res.send({status: 0, message: 'Stepbackups added failed'});
+        } else {
+          res.send({status: 0, message: 'Stepbackup added successfully'});
         }
       
     });
