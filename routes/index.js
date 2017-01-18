@@ -216,9 +216,9 @@ exports.wahis.show = function(req, res) {
 // GET Single Wahi =====================
 // =====================================
 exports.wahis.showUserWahis = function(req, res) {
-  var id = req.params.id;
+  var email = req.params.email;
   
-  connection.query('SELECT * FROM wahis WHERE userid = ?',[id],function(err,rows)
+  connection.query('SELECT * FROM wahis WHERE userid = ?',[email],function(err,rows)
     {
             
     if(err) {
@@ -272,7 +272,7 @@ exports.wahis.save_edit = function(req,res){
 // =====================================
 exports.wahis.delete = function(req,res){
           
-    var id = req.params.id;        
+    var id = req.params.id;
     connection.query("DELETE FROM wahis WHERE id = ? ",[id], function(err, rows)
     {
         
@@ -281,5 +281,147 @@ exports.wahis.delete = function(req,res){
         
          res.send(id);
          
+    });
+};
+
+// =====================================
+// GET Users ==================
+// =====================================
+exports.users = function(req, res) {
+  connection.query('SELECT * FROM users', function(err, rows, fields) {
+    if (err) {
+      throw err;
+    }
+    else {
+      res.send({ result:rows });
+    }
+    
+  });
+};
+
+
+// =====================================
+// GET Single User =====================
+// =====================================
+exports.users.show = function(req, res) {
+  var email = req.params.email;
+  
+  connection.query('SELECT * FROM users WHERE email = ?',[email],function(err,rows)
+    {
+            
+    if(err) {
+    throw err;
+  }
+  else {
+    res.send({ result:rows });
+    }
+                           
+    });
+};
+
+
+// =====================================
+// ADD User ===============================
+// =====================================
+exports.users.add = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+
+    var data = {
+
+        password: input.password,
+        email: input.email
+
+    };
+    
+    connection.query('INSERT INTO users set ?', data, function(err, rows)
+    {
+
+      if (err) {
+
+          res.send({status: 1, message: 'Wahikaka creation failed' + err});
+        } else {
+          res.send({status: 0, message: 'Wahikaka created successfully'});
+        }
+      
+    });
+};
+
+// =====================================
+// GET Wahi steps ==================
+// =====================================
+exports.wahisteps = function(req, res) {
+  connection.query('SELECT * FROM wahisteptable', function(err, rows, fields) {
+    if (err) {
+      throw err;
+    }
+    else {
+      res.send({ result:rows });
+    }
+    
+  });
+};
+
+// =====================================
+// GET sum of wahi steps ==================
+// =====================================
+exports.wahisteps.sum = function(req, res) {
+
+  var input = JSON.parse(JSON.stringify(req.body));
+
+  var email = input.mail;
+  var fromDate = input.fromDate;
+  var toDate = input.toDate;
+
+
+  // $sqlquery="SELECT SUM(steps) FROM wahisteptable WHERE userid='".$mail."' AND dateCol between '".$from."' AND '".$to."';";
+  connection.query('SELECT SUM(steps) FROM wahisteptable WHERE userid=? AND dateCol between ? and ?',[email, fromDate, toDate], function(err, rows, fields) {
+    if (err) {
+      throw err;
+    }
+    else {
+      res.send({ result:rows[0]["SUM(steps)"] });
+    }
+    
+  });
+};
+
+
+// =====================================
+// ADD wahi steps ===============================
+// =====================================
+exports.wahisteps.add = function(req, res) {
+    var input = JSON.parse(JSON.stringify(req.body));
+
+    var userid= input.mail;
+    var dateCol = input.date;
+    var steps = input.steps;
+
+
+    var data = {
+
+        userid: userid,
+        dateCol: dateCol,
+        steps: steps
+
+    };
+    
+    connection.query('INSERT INTO wahisteptable set ?', data, function(err, rows)
+    {
+
+      if (err) {
+
+          //res.send({status: 1, message: 'Wahikaka insert failed' + err});
+          connection.query('UPDATE wahisteptable SET steps=? WHERE userid=? AND dateCol=?', [steps, userid, dateCol], function(err, rows){
+
+            if(err){
+                throw err;
+            }else {
+              res.send({status: 0, message: 'Wahisteps updated successfully'});
+            }
+          });
+        } else {
+          res.send({status: 0, message: 'Wahisteps added successfully'});
+        }
+      
     });
 };
