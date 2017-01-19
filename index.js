@@ -38,26 +38,27 @@ app.post('/register', routes.register.send);
 app.post('/login', routes.login.send);
 
 //REST-API
-app.get('/wahis', routes.wahis);
-app.get('/wahi/:id', routes.wahis.show);
-app.get('/wahis/:email', routes.wahis.showUserWahis);
-app.post('/wahis/add', routes.wahis.add);
-app.post('/wahis/edit/:id', routes.wahis.save_edit);
-app.get('/wahis/delete/:id', routes.wahis.delete);
 
-app.get('/users', routes.users);
-app.get('/user/:email', routes.users.show);
-app.post('/users/add', routes.users.add);
+app.get('/api/wahis', routes.wahis);
+app.get('/api/wahi/:id', routes.wahis.show);
+app.get('/api/wahis/:email', routes.wahis.showUserWahis);
+app.post('/api/wahis/add', routes.wahis.add);
+app.post('/api/wahis/edit/:id', routes.wahis.save_edit);
+app.get('/api/wahis/delete/:id', routes.wahis.delete);
+
+app.get('/api/users', routes.users);
+app.get('/api/user/:email', routes.users.show);
+app.post('/api/users/add', routes.users.add);
 
 
 //app.get('/wahisteps/', routes.wahisteps);
-app.post('/wahisteps/sum', routes.wahisteps.sum);
-app.post('/wahisteps/add', routes.wahisteps.add);
+app.post('/api/wahisteps/sum', routes.wahisteps.sum);
+app.post('/api/wahisteps/add', routes.wahisteps.add);
 
 
-app.get('/stepsbackup/', routes.stepsbackup);
-app.post('/stepsbackup/add', routes.stepsbackup.add);
-app.post('/stepsbackup/userDate', routes.stepsbackup.userDate);
+app.get('/api/stepsbackup/', routes.stepsbackup);
+app.post('/api/stepsbackup/add', routes.stepsbackup.add);
+app.post('/api/stepsbackup/userDate', routes.stepsbackup.userDate);
 
 app.get('*', function(req, res) {
 	res.send("Incorrect route");
