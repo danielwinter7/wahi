@@ -181,8 +181,7 @@ exports.wahis.add = function(req, res) {
         lonFrom : input.lonFrom,
         lonTo : input.lonTo,
         infoText  : input.infoText,
-        userid: input.userid, 
-        timestamp: input.timestamp
+        userid: input.userid
 
     };
     
