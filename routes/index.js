@@ -26,7 +26,7 @@ exports.index = function(req, res) {
 exports.home = function(req, res) {
 	connection.query('SELECT * FROM wahis ORDER BY timestamp DESC', function(err, rows, fields) {
 		if (err) {
-			throw err;
+			   res.send({ err });
 		}
 		else {
 			res.render('home', {
@@ -49,7 +49,7 @@ exports.show = function(req, res){
     {
             
     if(err) {
-		throw err;
+		   res.send({ err });
 	}
 	else {
 		res.render('home_show',{
@@ -146,7 +146,7 @@ exports.register.send = function(req, res) {
 exports.wahis = function(req, res) {
 	connection.query('SELECT * FROM wahis', function(err, rows, fields) {
 		if (err) {
-			throw err;
+			   res.send({ err });
 		}
 		else {
 			res.send({ result:rows });
@@ -203,7 +203,7 @@ exports.wahis.show = function(req, res) {
     {
             
     if(err) {
-		throw err;
+		   res.send({ err });
 	}
 	else {
 		res.send({ result:rows });
@@ -222,7 +222,7 @@ exports.wahis.showUserWahis = function(req, res) {
     {
             
     if(err) {
-    throw err;
+      res.send({ err });
   }
   else {
     res.send({ result:rows });
@@ -290,7 +290,7 @@ exports.wahis.delete = function(req,res){
 exports.users = function(req, res) {
   connection.query('SELECT * FROM users', function(err, rows, fields) {
     if (err) {
-      throw err;
+         res.send({ err });
     }
     else {
       res.send({ result:rows });
@@ -310,7 +310,7 @@ exports.users.show = function(req, res) {
     {
             
     if(err) {
-    throw err;
+       res.send({ err });
   }
   else {
     res.send({ result:rows });
@@ -352,7 +352,7 @@ exports.users.add = function(req, res) {
 exports.wahisteps = function(req, res) {
   connection.query('SELECT * FROM wahisteptable', function(err, rows, fields) {
     if (err) {
-      throw err;
+         res.send({ err });
     }
     else {
       res.send({ result:rows });
@@ -376,7 +376,7 @@ exports.wahisteps.sum = function(req, res) {
   // $sqlquery="SELECT SUM(steps) FROM wahisteptable WHERE userid='".$mail."' AND dateCol between '".$from."' AND '".$to."';";
   connection.query('SELECT SUM(steps) FROM wahisteptable WHERE userid=? AND dateCol between ? and ?',[email, fromDate, toDate], function(err, rows, fields) {
     if (err) {
-      throw err;
+         res.send({ err });
     }
     else {
       res.send({ result:rows[0]["SUM(steps)"] });
@@ -414,7 +414,7 @@ exports.wahisteps.add = function(req, res) {
           connection.query('UPDATE wahisteptable SET steps=? WHERE userid=? AND dateCol=?', [steps, userid, dateCol], function(err, rows){
 
             if(err){
-                throw err;
+                 res.send({ err });
             }else {
               res.send({status: 0, message: 'Wahisteps updated successfully ' + dateCol});
             }
@@ -433,7 +433,7 @@ exports.wahisteps.add = function(req, res) {
 exports.stepsbackup = function(req, res) {
   connection.query('SELECT * FROM stepzwischenstand', function(err, rows, fields) {
     if (err) {
-      throw err;
+       res.send({ err });
     }
     else {
       res.send({ result:rows });
@@ -483,7 +483,7 @@ exports.stepsbackup.userDate = function(req, res) {
     {
             
     if(err) {
-    throw err;
+       res.send({ err });
   }
   else {
     res.send({ result:rows });
