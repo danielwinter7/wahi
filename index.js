@@ -22,7 +22,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 //app.use(session({ secret: 'ilovewahikaka' })); // session secret
-app.use(passport.initialize());
+//app.use(passport.initialize());
 //app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
