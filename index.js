@@ -29,6 +29,7 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
+app.get('/profil', routes.profil);
 app.get('/home', routes.home);
 app.get('/home/show/:id', routes.show);
 app.get('/home/delete/:id', routes.delete);

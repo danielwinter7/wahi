@@ -14,7 +14,7 @@
 				        </button>
 
 				        <!-- Branding Image -->
-				        <a class="navbar-brand" href="/">
+				        <a class="navbar-brand" href="/home?mail=<%- mail -%>">
 				            <img src="/images/Logo-klein.png" alt="Logo Wahikaka">
 				        </a>
 				    </div>
@@ -29,22 +29,13 @@
 				        <ul class="nav navbar-nav navbar-right">
 			                <li class="dropdown">
 			                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-			                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> Username <span class="caret"></span>
+			                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%=mail %> <span class="caret"></span>
 			                    </a>
 
 			                    <ul class="dropdown-menu" role="menu">
-			                        <li><a href="#">Meine Wahikakas</a></li>
-			                        <li><a href="#">Profil verwalten</a></li>
-			                        <li>
-			                            <a href="#"
-			                                onclick="event.preventDefault();
-			                                         document.getElementById('logout-form').submit();">
-			                                Logout
-			                            </a>
-
-			                            <form id="logout-form" action="#" method="POST" style="display: none;">
-			                            </form>
-			                        </li>
+			                        <li><a href="/home?mail=<%- mail -%>">Meine Wahikakas</a></li>
+			                        <li><a href="/profil?mail=<%- mail -%>">Profil verwalten</a></li>
+			                        <li><a href="#">Logout</a></li>
 			                    </ul>
 			                </li>
 				        </ul>

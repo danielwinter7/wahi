@@ -33,7 +33,7 @@
                     lng: rows[i].lonTo,
                     title: rows[i].toCity,
                     infoWindow: {
-                      content: '<p style="color: black;">Start: '+rows[i].fromCity+' <br/> Ziel: '+rows[i].toCity+'</p>'
+                      content: '<p style="color: black;">Start: '+rows[i].fromCity+' <br/> Ziel: '+rows[i].toCountry+'</p>'
                     }
                   });
                   bounds.extend(new google.maps.LatLng(rows[i].latTo, rows[i].lonTo));
@@ -59,7 +59,6 @@
                         <th>bis (Stadt)</th>
                         <th>bis (Land)</th>
                         <th>Richtung</th>
-                        <th>Text</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,10 +68,15 @@
                         <td><%= moment(rows[i].timestamp).format('D.MM.YYYY, HH:mm'); %></td>
                         <td><%= rows[i].steps %></td>
                         <td><%= rows[i].fromCity %></td>
-                        <td><%= rows[i].toCity %></td>
+                        <td>
+                        <% if (typeof rows[0].toCity !='undefined' ? rows[0].toCity : '') { %>
+                          <%= rows[i].toCity %>   
+                        <% } else{ %>  
+                            <%= rows[i].toCountry %>
+                        <% } %> 
+                        </td>
                         <td><%= rows[i].toCountry %></td>
                         <td><%= rows[i].direction %></td>
-                        <td><%= rows[i].infoText %></td>
                      </tr>
                   <% } %>
                 </tbody>

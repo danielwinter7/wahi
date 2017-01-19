@@ -23,6 +23,13 @@ exports.index = function(req, res) {
 	});
 };
 
+exports.profil = function(req, res) {
+  res.render('profil', {
+    title: 'Profile verwalten',
+    'mail':req.query.mail,
+  });
+};
+
 exports.home = function(req, res) {
 	connection.query('SELECT * FROM wahis WHERE userid=? ORDER BY timestamp DESC', [req.query.mail], function(err, rows, fields) {
 		if (err) {
