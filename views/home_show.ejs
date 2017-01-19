@@ -9,7 +9,7 @@
   		<div class="row">
   			<div class="col-md-12">
 
-        <a href="/home" class="btn btn-wahi pull-right">Zurück zur Übersicht</a>
+        <a href="/home?mail=<%= mail %>" class="btn btn-wahi pull-right">Zurück zur Übersicht</a>
 
 				<h1><%=title %> - <%= rows[0].toCity %></h1>
 
@@ -64,7 +64,7 @@
                 <p><i class="fa fa-map-marker fa-fw fa-2x" aria-hidden="true"></i> von: <%= rows[0].fromCity %> - nach <%= rows[0].toCity %>, <%= rows[0].toCountry %></p>
                 <p><i class="fa fa-quote-left fa-fw fa-2x" aria-hidden="true"></i><%= rows[0].infoText %></p>
             </div>
-            <a class="btn btn-danger pull-right" href="/home/delete/<%= rows[0].id %>">Lösche dieses Wahikaka!</a>
+            <a class="btn btn-danger pull-right" href="/home/delete/<%= rows[0].id %>?mail=<%= mail %>">Lösche dieses Wahikaka!</a>
             <div class="clearfix"></div>
             <div class="content__detailview-mapdetail" id="mapdetail"></div>  
         </div>

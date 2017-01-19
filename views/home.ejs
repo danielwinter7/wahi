@@ -8,9 +8,7 @@
   	<div class="container">
   		<div class="row">
   			<div class="col-md-12">
-          <% if (message.length > 0) { %>
-          <div class="alert alert-success alert-wahi"><%= message %></div>
-          <% } %>
+          
 
   				<h1><%=title %></h1>
 
@@ -27,6 +25,7 @@
                 lat: "48.7361712",
                 lng: "9.0846891"
               });
+              var bounds = new google.maps.LatLngBounds();
               var rows = <%- JSON.stringify(rows) %>;
               for (var i = 0, len = rows.length; i < len; i++) {
                   map.addMarker({
@@ -37,7 +36,12 @@
                       content: '<p style="color: black;">Start: '+rows[i].fromCity+' <br/> Ziel: '+rows[i].toCity+'</p>'
                     }
                   });
+                  bounds.extend(new google.maps.LatLng(rows[i].latTo, rows[i].lonTo));
               }
+
+              
+
+              map.fitBounds(bounds);
             });
         </script>
         <div class="content__detailview">
@@ -61,7 +65,7 @@
                 <tbody>
                   <% for(var i=0; i<rows.length; i++) { %>
                     <tr>
-                        <td><a class="btn btn-wahi btn-sm" href="/home/show/<%= rows[i].id %>">Details</a></td>
+                        <td><a class="btn btn-wahi btn-sm" href="/home/show/<%= rows[i].id %>?mail=<%- mail -%>">Details</a></td>
                         <td><%= moment(rows[i].timestamp).format('D.MM.YYYY, HH:mm'); %></td>
                         <td><%= rows[i].steps %></td>
                         <td><%= rows[i].fromCity %></td>

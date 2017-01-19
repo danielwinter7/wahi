@@ -24,17 +24,18 @@ exports.index = function(req, res) {
 };
 
 exports.home = function(req, res) {
-	connection.query('SELECT * FROM wahis ORDER BY timestamp DESC', function(err, rows, fields) {
+	connection.query('SELECT * FROM wahis WHERE userid=? ORDER BY timestamp DESC', [req.query.mail], function(err, rows, fields) {
 		if (err) {
 			   res.send({ err });
 		}
 		else {
 			res.render('home', {
 				'rows' : rows,
-        moment: moment,
+        		moment: moment,
+        		'mail':req.query.mail,
 				title: 'Meine Wahi Kakas',
-				message: req.flash('messageDelete'),
-        message: req.flash('messageLogin')
+				//message: req.flash('messageDelete'),
+       // message: req.flash('messageLogin')
 			});
 		}
 		
@@ -44,6 +45,8 @@ exports.home = function(req, res) {
 exports.show = function(req, res){
     
   var id = req.params.id;
+  var mail = req.query.mail;
+  res.locals.mail = mail;
 
   connection.query('SELECT * FROM wahis WHERE id = ?',[id],function(err,rows)
     {
@@ -54,6 +57,7 @@ exports.show = function(req, res){
 	else {
 		res.render('home_show',{
 			rows : rows,
+			'mail':mail,
 			title: " Detailübersicht "
 		});
     }
@@ -64,6 +68,8 @@ exports.show = function(req, res){
 exports.delete = function(req, res){
     
   var id = req.params.id;
+  var mail = req.query.mail;
+  res.locals.mail = mail;
     
  // req.getConnection(function (err, connection) {
     
@@ -74,8 +80,8 @@ exports.delete = function(req, res){
              console.log("Error deleting : %s ",err );
         }
         else {
-        	req.flash('messageDelete', 'Wahikaka erflogreich gelöscht');
-         	res.redirect('/home');
+        	//req.flash('messageDelete', 'Wahikaka erflogreich gelöscht');
+         	res.redirect('/home?mail='+req.query.mail);
      	}
          
     });
@@ -89,9 +95,9 @@ exports.delete = function(req, res){
 exports.login = function(req, res) {
 
     // render the page and pass in any flash data if it exists
-    res.render('login', {message: req.flash('loginMessage'),
+    res.render('login', { //message:req.flash('loginMessage'),
 		        title: "Login",
-            message: req.flash('messageRegister')
+            //message: req.flash('messageRegister')
     });
 };
 
@@ -105,8 +111,8 @@ exports.login.send = function(req, res) {
 
     connection.query('SELECT * FROM users WHERE email = ?', data.email, function(err, rows, fields){
     if (err) console.log("Error inserting : %s ",err );
-          req.flash('messageLogin', 'Du bist nun eingeloggt, '+ rows[0].name +'. Viel Spaß mit deinen Wahi Kakas.');
-          res.redirect('/home');
+          //req.flash('messageLogin', 'Du bist nun eingeloggt, '+ rows[0].name +'. Viel Spaß mit deinen Wahi Kakas.');
+          res.redirect('/home?mail='+data.email);
 
     });
 };
@@ -117,7 +123,7 @@ exports.login.send = function(req, res) {
 // show the login form
 exports.register = function(req, res) {
     // render the page and pass in any flash data if it exists
-    res.render('register', {message: req.flash('registerMessage'),
+    res.render('register', {//message: req.flash('registerMessage'),
 		title: "register",
     });
 };
@@ -198,6 +204,7 @@ exports.wahis.add = function(req, res) {
 // =====================================
 exports.wahis.show = function(req, res) {
 	var id = req.params.id;
+	var mail = req.query.mail;
 	
 	connection.query('SELECT * FROM wahis WHERE id = ?',[id],function(err,rows)
     {
