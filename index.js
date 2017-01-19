@@ -50,7 +50,7 @@ app.get('/user/:email', routes.users.show);
 app.post('/users/add', routes.users.add);
 
 
-app.get('/wahisteps/', routes.wahisteps);
+//app.get('/wahisteps/', routes.wahisteps);
 app.post('/wahisteps/sum', routes.wahisteps.sum);
 app.post('/wahisteps/add', routes.wahisteps.add);
 
