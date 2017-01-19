@@ -36,7 +36,7 @@ app.get('/login', routes.login);
 app.get('/register', routes.register);
 app.post('/register', routes.register.send);
 app.post('/login', routes.login.send);
-;
+
 //REST-API
 app.get('/wahis', routes.wahis);
 app.get('/wahi/:id', routes.wahis.show);
