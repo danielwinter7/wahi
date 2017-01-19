@@ -493,7 +493,7 @@ exports.stepsbackup.userDate = function(req, res) {
        res.send({ err });
   }
   else {
-    res.send({ result:rows });
+    res.send({ result:rows[0]["steps"] });
     }
                            
     });
