@@ -313,7 +313,7 @@ exports.users = function(req, res) {
 exports.users.show = function(req, res) {
   var email = req.params.email;
   
-  connection.query('SELECT * FROM users WHERE email = ?',[email],function(err,rows)
+  connection.query('SELECT password FROM users WHERE email = ?',[email],function(err,rows)
     {
             
     if(err) {
