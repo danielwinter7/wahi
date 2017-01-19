@@ -8,7 +8,7 @@ var flash    = require('connect-flash');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var session      = require('express-session');
+//var session      = require('express-session');
 var passwordHash = require('password-hash');
 
 var app = express();
@@ -21,9 +21,9 @@ app.use(bodyParser.urlencoded({extended: true })); // get information from html 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovewahikaka' })); // session secret
+//app.use(session({ secret: 'ilovewahikaka' })); // session secret
 app.use(passport.initialize());
-app.use(session({cookie: { maxAge: 60000 }}));
+//app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 app.use(express.static(path.join(__dirname, 'public')));
