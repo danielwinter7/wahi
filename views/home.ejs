@@ -69,11 +69,11 @@
                         <td><%= rows[i].steps %></td>
                         <td><%= rows[i].fromCity %></td>
                         <td>
-                        <% if (typeof rows[0].toCity !='undefined' ? rows[0].toCity : '') { %>
+                        <% if (typeof rows[i].toCity != 'undefined' ? rows[i].toCity : '') { %>
                           <%= rows[i].toCity %>   
                         <% } else{ %>  
                             <%= rows[i].toCountry %>
-                        <% } %> 
+                        <% } %>
                         </td>
                         <td><%= rows[i].toCountry %></td>
                         <td><%= rows[i].direction %></td>
